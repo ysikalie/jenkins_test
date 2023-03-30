@@ -1,16 +1,16 @@
+Jenkinsfile (Declarative Pipeline)
 pipeline {
-    agent { docker 'python:3.5.1' }
+    agent any
     stages {
-        stage('deploy') {
+        stage('Test') {
             steps {
-                retry(3){
-                     sh 'echo "Hello World"'
-                }
-               timeout(time:3, unit: 'MINUTES'){
-                    sh 'python --version'
-               } 
-               sh 'printenv'
+                sh './gradlew check'
             }
+        }
+    }
+    post {
+        always {
+            junit 'build/reports/**/*.xml'
         }
     }
 }
