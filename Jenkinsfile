@@ -9,9 +9,7 @@ pipeline {
                timeout(time:3, unit: 'MINUTES'){
                     sh 'python --version'
                } 
-               {
-                   sh 'printenv'
-               }
+               sh 'printenv'
             }
         }
     }
